@@ -1,0 +1,91 @@
+{
+  "name": "webpack-monitor",
+  "displayName": "VSCode Webpack Monitor",
+  "description": "VSCode Webpack Monitor for Visual Studio Code. The user interface app for the Webpack Monitor",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/design4pro/vscode-webpack-monitor.git"
+  },
+  "author": {
+    "name": "DESIGN4PRO",
+    "email": "r.wolak@design4.pro"
+  },
+  "publisher": "design4pro",
+  "main": "main.js",
+  "icon": "assets/webpack-monitor.png",
+  "galleryBanner": {
+    "color": "#176BCC",
+    "theme": "dark"
+  },
+  "homepage": "https://github.com/design4pro/vscode-webpack-monitor/",
+  "bugs": {
+    "url": "https://github.com/design4pro/vscode-webpack-monitor/issues",
+    "email": "webpack-monitor@design4.pro"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.31.0"
+  },
+  "keywords": [
+    "webpack",
+    "monitor",
+    "stats"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "dependencies": {
+    "jsonc-parser": "^2.1.1",
+    "json5": "2.1.1"
+  },
+  "contributes": {
+    "menus": {
+      "view/title": [
+        {
+          "command": "webpackMonitor.refreshWorkspaceJsonTree",
+          "when": "view == project",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "webpackMonitor.revealInExplorer",
+          "when": "viewItem == project",
+          "group": "inline"
+        }
+      ]
+    },
+    "commands": [],
+    "configuration": {
+      "title": "Webpack Monitor",
+      "properties": {
+        "nxConsole.enableTelemetry": {
+          "type": "boolean",
+          "default": true,
+          "description": "Help make Webpack Monitor better by sending anonymous usage data to the DESIGN4PRO team."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "webpack-monitor",
+          "title": "Webpack Monitor",
+          "icon": "tree-view-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "webpack-monitor": [
+        {
+          "id": "webpackMonitor",
+          "name": "UI"
+        }
+      ]
+    }
+  }
+}

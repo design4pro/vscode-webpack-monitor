@@ -10,23 +10,30 @@
       },
       "root": "apps/vscode-ui",
       "sourceRoot": "apps/vscode-ui/src",
-      "prefix": "vscode-webpack-monitor",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/vscode-ui",
+            "outputPath": "dist/apps/vscode/assets/public",
             "index": "apps/vscode-ui/src/index.html",
             "main": "apps/vscode-ui/src/main.ts",
             "polyfills": "apps/vscode-ui/src/polyfills.ts",
             "tsConfig": "apps/vscode-ui/tsconfig.app.json",
-            "aot": false,
             "assets": [
               "apps/vscode-ui/src/favicon.ico",
               "apps/vscode-ui/src/assets"
             ],
             "styles": ["apps/vscode-ui/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "aot": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/vscode-ui/styles/src/lib"]
+            },
+            "es5BrowserSupport": false
           },
           "configurations": {
             "production": {
@@ -34,29 +41,16 @@
                 {
                   "replace": "apps/vscode-ui/src/environments/environment.ts",
                   "with": "apps/vscode-ui/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
                 },
                 {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "replace": "apps/vscode-ui/src/styles.scss",
+                  "with": "apps/vscode-ui/src/_styles.prod.scss"
                 }
-              ]
+              ],
+              "sourceMap": false,
+              "aot": true,
+              "optimization": true,
+              "buildOptimizer": true
             }
           }
         },
@@ -123,18 +117,105 @@
           }
         }
       }
+    },
+    "vscode": {
+      "root": "apps/vscode",
+      "sourceRoot": "apps/vscode/src",
+      "projectType": "application",
+      "prefix": "vscode",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/vscode",
+            "main": "apps/vscode/src/main.ts",
+            "tsConfig": "apps/vscode/tsconfig.app.json",
+            "assets": [
+              "apps/vscode/src/package.json",
+              "apps/vscode/src/tree-view-icon.svg",
+              "apps/vscode/src/assets",
+              {
+                "glob": "README.md",
+                "input": "./",
+                "output": "/"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "externalDependencies": ["vscode"],
+              "sourceMap": false,
+              "optimization": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/vscode/src/environments/environment.ts",
+                  "with": "apps/vscode/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/vscode/tsconfig.app.json"],
+            "exclude": ["**/node_modules/**", "**/generated/**"]
+          }
+        }
+      }
+    },
+    "server": {
+      "root": "libs/server",
+      "sourceRoot": "libs/server/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/server/tsconfig.lib.json",
+              "libs/server/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/server/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/server/jest.config.js",
+            "tsConfig": "libs/server/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "packageManager": "yarn",
     "defaultCollection": "@nrwl/angular"
   },
   "schematics": {
+    "@nrwl/schematics:component": {
+      "styleext": "scss"
+    },
+    "@nrwl/schematics:library": {
+      "unitTestRunner": "jest",
+      "framework": "angular"
+    },
+    "@nrwl/schematics:node-application": {
+      "framework": "express"
+    },
     "@nrwl/angular:application": {
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
+      "unitTestRunner": "none"
     }
   },
   "defaultProject": "vscode-ui"

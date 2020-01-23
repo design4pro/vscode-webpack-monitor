@@ -1,67 +1,99 @@
 {
-  "name": "vscode-webpack-monitor",
+  "name": "webpack-monitor",
   "version": "0.0.0",
+  "publisher": "design4pro",
+  "author": {
+    "name": "DESIGN4PRO",
+    "email": "r.wolak@design4.pro"
+  },
   "license": "MIT",
+  "engines": {
+    "vscode": "^1.35.0"
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ],
   "scripts": {
+    "commit": "commit",
     "ng": "ng",
     "nx": "nx",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "nx workspace-lint && ng lint",
-    "e2e": "ng e2e",
-    "affected:apps": "nx affected:apps",
-    "affected:libs": "nx affected:libs",
-    "affected:build": "nx affected:build",
-    "affected:e2e": "nx affected:e2e",
-    "affected:test": "nx affected:test",
-    "affected:lint": "nx affected:lint",
-    "affected:dep-graph": "nx affected:dep-graph",
-    "affected": "nx affected",
-    "format": "nx format:write",
-    "format:write": "nx format:write",
-    "format:check": "nx format:check",
+    "start": "nps",
+    "format": "nps format.write",
+    "build-vs-code": "nps prepare.dev.vscode",
+    "postinstall": "node ./tools/scripts/postinstall.js",
     "update": "ng update @nrwl/workspace",
-    "update:check": "ng update",
-    "workspace-schematic": "nx workspace-schematic",
-    "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "release": "npx semantic-release"
   },
   "private": true,
-  "dependencies": {
-    "@nrwl/angular": "8.11.2",
-    "@angular/animations": "^8.2.0",
-    "@angular/common": "^8.2.0",
-    "@angular/compiler": "^8.2.0",
-    "@angular/core": "^8.2.0",
-    "@angular/forms": "^8.2.0",
-    "@angular/platform-browser": "^8.2.0",
-    "@angular/platform-browser-dynamic": "^8.2.0",
-    "@angular/router": "^8.2.0",
-    "core-js": "^2.5.4",
-    "rxjs": "~6.4.0",
-    "zone.js": "^0.9.1"
-  },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^0.803.23",
     "@angular/cli": "8.3.14",
-    "@nrwl/workspace": "8.11.2",
-    "@types/node": "~8.9.4",
-    "dotenv": "6.2.0",
-    "ts-node": "~7.0.0",
-    "tslint": "~5.11.0",
-    "eslint": "6.1.0",
-    "typescript": "~3.5.3",
-    "prettier": "1.18.2",
     "@angular/compiler-cli": "^8.2.0",
     "@angular/language-service": "^8.2.0",
-    "@angular-devkit/build-angular": "^0.803.23",
-    "codelyzer": "~5.0.1",
-    "jest-preset-angular": "7.0.0",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@commitlint/prompt-cli": "^8.2.0",
+    "@nrwl/cypress": "8.11.2",
     "@nrwl/jest": "8.11.2",
-    "jest": "24.1.0",
+    "@nrwl/node": "8.11.2",
+    "@nrwl/workspace": "8.11.2",
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/git": "^7.0.16",
     "@types/jest": "24.0.9",
-    "ts-jest": "24.0.0",
+    "@types/node": "~8.9.4",
+    "codelyzer": "~5.0.1",
     "cypress": "3.6.1",
-    "@nrwl/cypress": "8.11.2"
+    "dotenv": "6.2.0",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "jest": "24.1.0",
+    "jest-preset-angular": "7.0.0",
+    "nps-utils": "1.7.0",
+    "nps": "5.9.3",
+    "prettier": "1.18.2",
+    "semantic-release": "^15.13.24",
+    "shelljs": "0.8.3",
+    "source-map-explorer": "^1.8.0",
+    "ts-jest": "24.0.0",
+    "ts-node": "~7.0.0",
+    "tslint": "~5.11.0",
+    "typescript": "~3.5.3",
+    "vsce": "^1.69.0",
+    "vscode": "^1.1.35",
+    "vscode-nls-dev": "^3.3.1"
+  },
+  "dependencies": {},
+  "lint-staged": {
+    "*": [
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "modulePathIgnorePatterns": [
+      "dist",
+      "tmp"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testURL": "http://localhost",
+    "testMatch": [
+      "**/*.+(spec|test).(ts|js)"
+    ]
   }
 }

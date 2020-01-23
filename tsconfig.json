@@ -7,15 +7,25 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2019", "dom", "esnext.asynciterable"],
+    "types": ["node", "jest"],
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@design4pro/server": ["libs/server/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

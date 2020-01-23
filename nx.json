@@ -1,5 +1,5 @@
 {
-  "npmScope": "vscode-webpack-monitor",
+  "npmScope": "design4pro",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": {
@@ -17,6 +17,12 @@
     "vscode-ui-e2e": {
       "tags": [],
       "implicitDependencies": ["vscode-ui"]
+    },
+    "vscode": {
+      "tags": ["extension"]
+    },
+    "server": {
+      "tags": []
     }
   }
 }
