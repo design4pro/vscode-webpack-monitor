@@ -1,0 +1,22 @@
+{
+  "npmScope": "vscode-webpack-monitor",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "vscode-ui": {
+      "tags": []
+    },
+    "vscode-ui-e2e": {
+      "tags": [],
+      "implicitDependencies": ["vscode-ui"]
+    }
+  }
+}

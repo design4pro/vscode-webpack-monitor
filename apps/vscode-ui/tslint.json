@@ -1,0 +1,17 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "vscodeWebpackMonitor",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "vscode-webpack-monitor",
+      "kebab-case"
+    ]
+  }
+}
