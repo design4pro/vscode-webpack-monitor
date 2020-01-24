@@ -23,6 +23,9 @@
     },
     "server": {
       "tags": []
+    },
+    "webpack-monitor": {
+      "tags": ["webpack"]
     }
   }
 }

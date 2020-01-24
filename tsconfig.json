@@ -24,7 +24,8 @@
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
-      "@design4pro/server": ["libs/server/src/index.ts"]
+      "@design4pro/server": ["libs/server/src/index.ts"],
+      "@design4pro/webpack-monitor": ["libs/webpack-monitor/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

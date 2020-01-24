@@ -189,6 +189,41 @@
           }
         }
       }
+    },
+    "webpack-monitor": {
+      "root": "libs/webpack-monitor",
+      "sourceRoot": "libs/webpack-monitor/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/webpack-monitor/tsconfig.lib.json",
+              "libs/webpack-monitor/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/webpack-monitor/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/webpack-monitor/jest.config.js",
+            "tsConfig": "libs/webpack-monitor/tsconfig.spec.json"
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/webpack-monitor",
+            "tsConfig": "libs/webpack-monitor/tsconfig.lib.json",
+            "packageJson": "libs/webpack-monitor/package.json",
+            "main": "libs/webpack-monitor/src/index.ts",
+            "assets": ["libs/webpack-monitor/*.md"]
+          }
+        }
+      }
     }
   },
   "cli": {
