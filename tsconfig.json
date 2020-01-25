@@ -25,7 +25,8 @@
     "baseUrl": ".",
     "paths": {
       "@design4pro/server": ["libs/server/src/index.ts"],
-      "@design4pro/webpack-monitor": ["libs/webpack-monitor/src/index.ts"]
+      "@design4pro/webpack-monitor": ["libs/webpack-monitor/src/index.ts"],
+      "@design4pro/vscode-ui/styles": ["libs/vscode-ui/styles/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

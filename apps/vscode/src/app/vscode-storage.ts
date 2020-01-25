@@ -1,6 +1,12 @@
 import { Store } from '@design4pro/server';
 import { ConfigurationTarget, ExtensionContext, workspace } from 'vscode';
 
+const ConfigKeys = ['enableTelemetry'];
+
+function isConfig(key: string): boolean {
+  return ConfigKeys.includes(key);
+}
+
 export class VSCodeStorage implements Store {
   static configurationSection = 'webpackMonitor';
 
@@ -32,19 +38,15 @@ export class VSCodeStorage implements Store {
   }
 }
 
-const ConfigKeys = ['enableTelemetry'];
-
-function isConfig(key: string): boolean {
-  return ConfigKeys.includes(key);
-}
-
 export interface VSCState {
   get<T>(key: string): T | undefined;
   get<T>(key: string, defaultValue: T): T;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   update(key: string, value: any, target: ConfigurationTarget): void;
 }
 
 export class SubstituteState implements VSCState {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   state: { [key: string]: any } = {};
 
   get<T>(key: string, defaultValue?: T): T {

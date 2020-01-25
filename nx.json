@@ -26,6 +26,9 @@
     },
     "webpack-monitor": {
       "tags": ["webpack"]
+    },
+    "vscode-ui-styles": {
+      "tags": ["ui"]
     }
   }
 }

@@ -30,13 +30,6 @@ module.exports = {
         server: 'ng build vscode --prod --noSourceMap',
         client: 'ng build vscode-ui --prod'
       }),
-      ci: {
-        vscode: nps.concurrent({
-          server: 'ng build vscode --noSourceMap',
-          client:
-            'ng build nx-console --configuration=vscode --noSourceMap --optimization=false --noCommonChunk --aot=false --buildOptimizer=false'
-        })
-      },
       dev: {
         vscode: nps.concurrent({
           server: 'ng build vscode --watch',
@@ -51,8 +44,7 @@ module.exports = {
         `shx rm -rf ${join('dist', 'apps', 'vscode', '**', '*-es5.js')}`,
         `shx rm -rf ${join('dist', 'apps', 'vscode', '**', '*.ts')}`,
         `node ${join('tools', 'scripts', 'vscode-vsce.js')}`
-      ),
-      intellij: `node ${join('tools', 'scripts', 'intellij-package.js')}`
+      )
     },
     format: {
       default: 'nx format:write --base=upstream/master',
