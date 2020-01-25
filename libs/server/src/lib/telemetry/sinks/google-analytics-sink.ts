@@ -1,3 +1,4 @@
+import * as ua from 'universal-analytics';
 import { TelemetryMessageBuilder } from '../message-builder';
 import { TelemetryType } from '../record';
 import { Sink } from '../sink';
@@ -10,8 +11,10 @@ const TRACKING_ID = 'UA-88380372-8';
 export type ApplicationPlatform = 'vscode';
 
 class TelemetryParams {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(readonly type: string, readonly data: any) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fetch(key: string): any {
     this.require(key);
     return this.data[key];
@@ -19,14 +22,14 @@ class TelemetryParams {
 
   require(key: string) {
     const msg = `Telemetry: ${this.type} is missing ${key}`;
-    if (!this.data.hasOwnProperty(key)) {
+    if (!Object.prototype.hasOwnProperty.call(this.data, key)) {
       throw new Error(msg);
     }
   }
 }
 
 export class GoogleAnalyticsSink implements Sink, TelemetryMessageBuilder {
-  visitor = require('universal-analytics')(TRACKING_ID, {
+  visitor = ua(TRACKING_ID, {
     uid: this.user.id
   });
 
@@ -46,6 +49,7 @@ export class GoogleAnalyticsSink implements Sink, TelemetryMessageBuilder {
     this.visitor.set('cd3', ANALYTICS_VERSION);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   record(type: TelemetryType, data: any): void {
     if (!this.enabled) return;
     const params = new TelemetryParams(type, data);

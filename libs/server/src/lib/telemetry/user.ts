@@ -1,4 +1,5 @@
-import { Store } from '@nx-console/server';
+import { Store } from '@design4pro/server';
+import { v4 as uuid } from 'uuid';
 
 export type UserState = 'untracked' | 'tracked';
 
@@ -8,7 +9,7 @@ export class User {
     let state: UserState = 'tracked';
 
     if (!id) {
-      id = require('uuid/v4')();
+      id = uuid();
       store.set('uuid', id);
     }
 

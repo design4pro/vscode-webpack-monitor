@@ -34,6 +34,7 @@ export class Telemetry implements TelemetryMessageBuilder {
     this.sinks.push(sink);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   record(type: TelemetryType, data: any = {}): void {
     this.sinks.forEach(s => s.record(type, data));
   }
