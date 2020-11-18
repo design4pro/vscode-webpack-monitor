@@ -83,7 +83,7 @@
     "nps-utils": "1.7.0",
     "prettier": "1.18.2",
     "rxjs": "6.5.4",
-    "semantic-release": "^15.13.24",
+    "semantic-release": "^17.2.3",
     "shelljs": "0.8.3",
     "shx": "^0.3.2",
     "source-map-explorer": "^1.8.0",
