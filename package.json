@@ -84,7 +84,7 @@
     "prettier": "1.18.2",
     "rxjs": "6.5.4",
     "semantic-release": "^15.13.24",
-    "shelljs": "0.8.3",
+    "shelljs": "0.8.5",
     "shx": "^0.3.2",
     "source-map-explorer": "^1.8.0",
     "stylelint-config-standard": "^18.3.0",
